@@ -1,0 +1,7 @@
+*.o
+push_swap.dSYM
+checker_Mac
+Push-Swap-Tester/
+.vscode
+.DS_Store
+push_swap
