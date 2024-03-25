@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
+// # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include <stdio.h>
 
@@ -53,7 +53,7 @@ void	move_rra(t_stack **list);
 void	move_rrb(t_stack **list);
 void	move_rrr(t_stack **list_a, t_stack **list_b);
 void	move_push(t_stack **list_a, t_stack **list_b);
-void    ps_input_validate(int  n, char **nbrs);
+void	ps_input_validate(int  n, char **nbrs);
 t_stack *ps_stack_init(char **nbrs, int n);
 int		find_max_nbr(t_stack *list);
 void	sort_3(t_stack **list);
@@ -77,5 +77,8 @@ char	*get_next_word(char *array, char separator);
 int		calculate_array_size(char **array);
 void	stack_add_back(t_stack **lst, t_stack *new);
 void	free_stack(t_stack *list);
+long	ft_atoi(const char *str);
+int		ft_isspace(char c);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

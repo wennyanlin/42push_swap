@@ -3,8 +3,8 @@ NAME = push_swap
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -MMD
 EXTRAFLAGS = -Iinclude -I$(SRC_DIR)/libft -I$(SRC_DIR)/ft_printf
-LDFLAGS = -L$(SRC_DIR)/libft -L$(SRC_DIR)/ft_printf
-LDLIBS := -framework OpenGL -framework AppKit -lft -lftprintf #-fsanitize=address
+LDFLAGS = -L$(SRC_DIR)/ft_printf
+LDLIBS := -framework OpenGL -framework AppKit -lftprintf #-fsanitize=address
 SRC_DIR		:=	src
 
 SRC_FILES	:=	$(SRC_DIR)/ps_main.c \
@@ -16,6 +16,7 @@ SRC_FILES	:=	$(SRC_DIR)/ps_main.c \
 				$(SRC_DIR)/ps_stack_init.c \
 				$(SRC_DIR)/ps_stack_sort.c \
 				$(SRC_DIR)/utils.c \
+				$(SRC_DIR)/ft_atoi.c \
 				$(SRC_DIR)/ps_split.c
 
 OBJ_FILES	=	$(SRC_FILES:.c=.o)
@@ -26,7 +27,7 @@ DEP_FILES	=	$(SRC_FILES:.c=.d)
 			$(CC) $(CFLAGS) -c $< -o $@
 
 # Mis reglas mis metodos
-all: LIBFT FT_PRINTF $(NAME)
+all: FT_PRINTF $(NAME)
 
 -include $(DEP_FILES)
 $(NAME): $(OBJ_FILES)
@@ -34,15 +35,14 @@ $(NAME): $(OBJ_FILES)
 
 clean:
 		rm -f $(OBJ_FILES) $(DEP_FILES)
-		make -C $(SRC_DIR)/libft clean
-		make -C $(SRC_DIR)/ft_printf clean
+		make -C $(SRC_DIR)/ft_printf fclean
 
 fclean:	clean
 		rm -f $(NAME)
 
 re:	fclean all
 
-.PHONY: all clean fclean re LIBFT FT_PRINTF
+.PHONY: all clean fclean re FT_PRINTF
 
 MLX:
 	make -C $(SRC_DIR)/libft --no-print-directory
