@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include "./libft/libft.h"
 # include <stdio.h>
-# include <stdbool.h>
 
 typedef struct s_move
 {
@@ -59,7 +58,7 @@ int		find_max_nbr(t_stack *list);
 void	sort_3(t_stack **list);
 void	print_stack(t_stack *list);
 int		stack_size(t_stack *list_a);
-void	sort(t_stack **list_a, t_stack **list_b);
+void	sort(t_stack **list_a);
 void	initialize_indexes(t_stack *list);
 t_move	calculate_moving_cost(int list_a_size, int list_b_size, int a_index, int b_index);
 int		find_target_node_in_b(int a_node, t_stack *list_b);
@@ -70,11 +69,12 @@ void	push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int
 void	execute_move(t_move move, t_stack **list_a, t_stack **list_b, int push_until);
 void	rotate_smallest_to_top(t_stack **list_a);
 t_move	optimize_moving_cost(t_move move);
-bool	is_stack_sorted(t_stack **list);
+int		is_stack_sorted(t_stack **list);
 char	**ps_split(char *array, char separator);
 int		ps_count_words(char *array, char separator);
 char	*get_next_word(char *array, char separator);
 int		calculate_array_size(char **array);
 void	stack_add_back(t_stack **lst, t_stack *new);
+void	free_stack(t_stack *list);
 
 #endif

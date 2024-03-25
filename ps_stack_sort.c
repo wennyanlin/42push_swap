@@ -214,13 +214,16 @@ void sort_3(t_stack **list)
 		move_swap(list);
 }
 
-void sort(t_stack **list_a, t_stack **list_b)
+void sort(t_stack **list_a)
 {
-	push_a_to_b(list_a, list_b, find_target_node_in_b, 3);
+	t_stack	*list_b;
+
+	list_b = NULL;
+	push_a_to_b(list_a, &list_b, find_target_node_in_b, 3);
 	sort_3(list_a);
 	initialize_indexes(*list_a);
-	initialize_indexes(*list_b);
-	push_a_to_b(list_b, list_a, find_target_node_in_a, 0);
+	initialize_indexes(list_b);
+	push_a_to_b(&list_b, list_a, find_target_node_in_a, 0);
 	rotate_smallest_to_top(list_a);
 }
 

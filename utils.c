@@ -54,7 +54,7 @@ void	initialize_indexes(t_stack *list)
 	}
 }
 
-bool	is_stack_sorted(t_stack **list)
+int	is_stack_sorted(t_stack **list)
 {
 	t_stack	*list_cpy;
 
@@ -62,10 +62,10 @@ bool	is_stack_sorted(t_stack **list)
 	while (list_cpy && list_cpy->next)
 	{
 		if (list_cpy->data > list_cpy->next->data)
-			return false;
+			return (0);
 		list_cpy = list_cpy->next;
 	}
-	return true;
+	return (1);
 }
 
 t_stack	*stack_last(t_stack *lst)

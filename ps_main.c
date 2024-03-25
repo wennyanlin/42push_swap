@@ -76,39 +76,30 @@ t_stack	*parse_input(int argc, char **argv)
 	return (list_a);
 }
 
+void	perform_sort(t_stack *list_a)
+{
+	if (!is_stack_sorted(&list_a))
+	{
+		if (stack_size(list_a) == 2)
+			move_swap(&list_a);
+		else if (stack_size(list_a) == 3)
+			sort_3(&list_a);
+		else
+			sort(&list_a);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack *list_a;
-	t_stack *list_b;
 
 	if (argc > 1)
 	{
 		list_a = parse_input(argc, argv);
 		if (!list_a)
 			return (EXIT_FAILURE);
-		argv = NULL;
-		list_b = NULL;
-		if (is_stack_sorted(&list_a) == true)
-		{
-			return (0);
-		}
-		else
-		{
-			if (stack_size(list_a) == 2)
-			{
-				move_swap(&list_a);
-				return (0);
-			}
-			else if (stack_size(list_a) == 3)
-			{
-				sort_3(&list_a);
-				return (0);
-			}
-			else
-				sort(&list_a, &list_b);
-		}
+		perform_sort(list_a);
 		free_stack(list_a);
-
 		// printf("\n\n------- STACK A -------\n\n");
 		// print_stack(list_a);
 		// printf("\n\n------- STACK B -------\n\n");
