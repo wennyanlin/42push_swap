@@ -67,3 +67,29 @@ bool	is_stack_sorted(t_stack **list)
 	}
 	return true;
 }
+
+t_stack	*stack_last(t_stack *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+void	stack_add_back(t_stack **lst, t_stack *new)
+{
+	t_stack	*last;
+
+	if (!lst)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		last = stack_last(*lst);
+		last->next = new;
+	}
+}

@@ -56,26 +56,36 @@ void	free_stack(t_stack *list)
 	list = NULL;
 }
 
+t_stack	*parse_input(int argc, char **argv)
+{
+	t_stack *list_a;
+	int f;
+
+	f = 0;
+	if (argc == 2)
+	{
+		argv = ps_split(argv[1], ' ');
+		f = 1;
+	}
+	argc = calculate_array_size(argv);
+	ps_input_validate(argc, argv);
+
+	list_a = ps_stack_init(argv, argc);
+	if (f == 1)
+		free_array(argv);
+	return (list_a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack *list_a;
 	t_stack *list_b;
-	int f;
-	f = 0;
+
 	if (argc > 1)
 	{
-		if (argc == 2)
-		{
-			argv = ps_split(argv[1], ' ');
-			f = 1;
-		}
-		argc = calculate_array_size(argv);
-		ps_input_validate(argc, argv);
-		list_a = NULL;
-		list_a = malloc(sizeof(t_stack));
-		ps_stack_init(list_a, argv, argc);
-		if (f == 1)
-			free_array(argv);
+		list_a = parse_input(argc, argv);
+		if (!list_a)
+			return (EXIT_FAILURE);
 		argv = NULL;
 		list_b = NULL;
 		if (is_stack_sorted(&list_a) == true)

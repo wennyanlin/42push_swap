@@ -54,7 +54,7 @@ void	move_rrb(t_stack **list);
 void	move_rrr(t_stack **list_a, t_stack **list_b);
 void	move_push(t_stack **list_a, t_stack **list_b);
 void    ps_input_validate(int  n, char **nbrs);
-void    ps_stack_init(t_stack *list, char **nbrs, int n);
+t_stack *ps_stack_init(char **nbrs, int n);
 int		find_max_nbr(t_stack *list);
 void	sort_3(t_stack **list);
 void	print_stack(t_stack *list);
@@ -75,5 +75,6 @@ char	**ps_split(char *array, char separator);
 int		ps_count_words(char *array, char separator);
 char	*get_next_word(char *array, char separator);
 int		calculate_array_size(char **array);
+void	stack_add_back(t_stack **lst, t_stack *new);
 
 #endif
