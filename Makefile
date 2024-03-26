@@ -1,10 +1,10 @@
 NAME = push_swap
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -MMD
+CFLAGS := -Wall -Wextra -Werror -MMD -g
 EXTRAFLAGS = -Iinclude -I$(SRC_DIR)/libft -I$(SRC_DIR)/ft_printf
 LDFLAGS = -L$(SRC_DIR)/ft_printf
-LDLIBS := -framework OpenGL -framework AppKit -lftprintf #-fsanitize=address
+LDLIBS := -framework OpenGL -framework AppKit -lftprintf -fsanitize=address
 SRC_DIR		:=	src
 
 SRC_FILES	:=	$(SRC_DIR)/ps_main.c \

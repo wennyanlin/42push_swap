@@ -35,6 +35,7 @@ typedef struct s_stack
 	int				data;
 	int				index;
 
+
 	struct s_stack	*next;
 	struct s_move	curr_move;
 }	t_stack;
@@ -60,7 +61,7 @@ void	sort_3(t_stack **list);
 void	print_stack(t_stack *list);
 int		stack_size(t_stack *list_a);
 void	sort(t_stack **list_a);
-void	initialize_indexes(t_stack *list);
+int		initialize_indexes(t_stack *list);
 t_move	calculate_moving_cost(int list_a_size, int list_b_size, int a_index, int b_index);
 int		find_target_node_in_b(int a_node, t_stack *list_b);
 int		find_target_node_in_a(int b_node, t_stack *list_a);

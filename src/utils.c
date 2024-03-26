@@ -1,18 +1,5 @@
 #include "push_swap.h"
-/*
-int	find_min_nbr(t_stack *list)
-{
-	int	min_nbr;
 
-	min_nbr = list->data;
-	while (list)
-	{
-		if (list->data < min_nbr)
-			min_nbr = list->data;
-		list = list->next;
-	}
-	return (min_nbr);
-}*/
 
 int	find_max_nbr(t_stack *list)
 {
@@ -41,7 +28,7 @@ int	stack_size(t_stack *list_a)
 	return (i);
 }
 
-void	initialize_indexes(t_stack *list)
+int	initialize_indexes(t_stack *list)
 {
 	int	index;
 
@@ -52,6 +39,7 @@ void	initialize_indexes(t_stack *list)
 		index++;
 		list = list->next;
 	}
+	return (index);
 }
 
 int	is_stack_sorted(t_stack **list)

@@ -53,17 +53,13 @@ void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int
 	int list_a_size;
 	int list_b_size;
 
-	list_a_size = stack_size(*list_a);
-	list_b_size = stack_size(*list_b);
 	if (!*list_b)
 	{
 		move_push(list_a, list_b);
 		write(1, "pb\n", 3);
-		list_a_size--;
-		list_b_size++;
 	}
-	initialize_indexes(*list_a);
-	initialize_indexes(*list_b);
+	list_a_size = initialize_indexes(*list_a);
+	list_b_size = initialize_indexes(*list_b);
 	while (list_a_size > push_until)
 	{
 		lowercost_node_moves = find_lowercost_node(*list_a, *list_b, list_a_size, list_b_size, f);
@@ -73,12 +69,21 @@ void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int
 			write(1, "pb\n", 3);
 		else if (push_until == 0)
 			write(1, "pa\n", 3);
-		list_a_size--;
-		list_b_size++;
-		initialize_indexes(*list_a);
-		initialize_indexes(*list_b);
+		list_a_size = initialize_indexes(*list_a);
+		list_b_size = initialize_indexes(*list_b);
 	}
 }
+
+/**
+ * Possible refactors:
+ * 1. initialize_indexes can return the size
+ * 		- this means we don't need to increment/decrement size on every push
+ * 2. make move_push part of the execute_move functions
+ * 		- this means execute move handles all moves
+ * 3. handle first move_push b move in the find_lowercost_node
+ * 		- this means find_lowercost_node handles all moves, including the first move
+ *
+*/
 
 t_move find_lowercost_node(t_stack *list_a, t_stack *list_b, int list_a_size, int list_b_size, int(f)(int, t_stack *))
 {
@@ -89,6 +94,7 @@ t_move find_lowercost_node(t_stack *list_a, t_stack *list_b, int list_a_size, in
 	lowercosts.total = -1;
 	initialize_indexes(list_a);
 	initialize_indexes(list_b);
+
 	while (list_a)
 	{
 		target_node_index = f(list_a->data, list_b); // find the target node
