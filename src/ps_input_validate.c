@@ -54,17 +54,27 @@ int	is_digit(int argc, char **argv)
 int	has_too_many_digits(char *str)
 {
 	int	str_len;
+	int	i;
 
+	i = 0;
 	str_len = ft_strlen(str);
-	if (str[0] == '-' || str[0] == '+')
+	if (str[i] == '-' || str[i] == '+')
 	{
 		str_len--;
+		i = 0;
+		while (str[++i] == '0')
+			str_len--;
 		if (str_len > 10)
 			return (1);
 	}
 	else
+	{
+		i = -1;
+		while (str[++i] == '0')
+			str_len--;
 		if (str_len > 11)
 			return (1);
+	}
 	return (0);
 }
 
