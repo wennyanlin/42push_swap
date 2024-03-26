@@ -89,21 +89,33 @@ void	perform_sort(t_stack *list_a)
 	}
 }
 
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (*str)
+		while (str[i])
+			i++;
+	return (i);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack *list_a;
 
 	if (argc > 1)
 	{
+		if (ft_strlen(argv[1]) == 0)
+		{
+			write(2, "Error\n", 6);
+			return (EXIT_FAILURE);
+		}
 		list_a = parse_input(argc, argv);
 		if (!list_a)
 			return (EXIT_FAILURE);
 		perform_sort(list_a);
 		free_stack(list_a);
-		// printf("\n\n------- STACK A -------\n\n");
-		// print_stack(list_a);
-		// printf("\n\n------- STACK B -------\n\n");
-		// print_stack(list_b);
 	}
 	return (0);
 }

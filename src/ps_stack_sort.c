@@ -182,26 +182,59 @@ void sort(t_stack **list_a)
 	rotate_smallest_to_top(list_a);
 }
 
+// void rotate_smallest_to_top(t_stack **list_a)
+// {
+// 	int i;
+// 	t_stack *tmp;
+
+// 	i = 1;
+// 	tmp = *list_a;
+
+// 	// find smallest
+// 	while (tmp && tmp->next && tmp->data < tmp->next->data)
+// 	{
+// 		i++;
+// 		tmp = tmp->next;
+// 	}
+// 	if (tmp && tmp->next && tmp->data > tmp->next->data)
+// 	{
+// 		while (i > 0)
+// 		{
+// 			move_ra(list_a);
+// 			i--;
+// 		}
+// 	}
+// }
+
 void rotate_smallest_to_top(t_stack **list_a)
 {
-	int i;
-	t_stack *tmp;
+	t_stack	*tmp;
+	int		i;
+	int		middle_line;
+	int		total;
 
-	i = 1;
 	tmp = *list_a;
-
-	// find smallest
-	while (tmp && tmp->next && tmp->data < tmp->next->data)
+	i = 1;
+	total = initialize_indexes(*list_a); //6
+	middle_line = total / 2; //3
+	while (tmp && tmp->next && tmp->data < tmp->next->data) // find smallest
 	{
 		i++;
 		tmp = tmp->next;
 	}
 	if (tmp && tmp->next && tmp->data > tmp->next->data)
 	{
-		while (i > 0)
+		if (tmp->index < middle_line)
 		{
-			move_ra(list_a);
-			i--;
+			i = tmp->index + 1;
+			while (i-- > 0)
+				move_ra(list_a);
+		}
+		else
+		{
+			i = total - tmp->index - 1;
+			while (i-- > 0)
+				move_rra(list_a);
 		}
 	}
 }
