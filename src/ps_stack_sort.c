@@ -15,54 +15,9 @@ t_move	empty_move(void)
 // add a parameter to differ/invert the 'move prints' when is executing from b to a
 void execute_move(t_move move, t_stack **list_a, t_stack **list_b, int push_until)
 {
-	while (move.ra > 0)
-	{
-		if (push_until == 3)
-			move_ra(list_a);
-		else if (push_until == 0)
-			move_rb(list_a);
-		move.ra--;
-	}
-	while (move.rb > 0)
-	{
-		if (push_until == 3)
-			move_rb(list_b);
-		else if (push_until == 0)
-			move_ra(list_b);
-		move.rb--;
-	}
-	while (move.rr > 0)
-	{
-		move_rr(list_a, list_b);
-		move.rr--;
-	}
-	while (move.rra > 0)
-	{
-		if (push_until == 3)
-			move_rra(list_a);
-		else if (push_until == 0)
-			move_rrb(list_a);
-		move.rra--;
-	}
-	while (move.rrb > 0)
-	{
-		if (push_until == 3)
-			move_rrb(list_b);
-		else if (push_until == 0)
-			move_rra(list_b);
-		move.rrb--;
-	}
-	while (move.rrr > 0)
-	{
-		move_rrr(list_a, list_b);
-		move.rrr--;
-	}
-	// we always push once after a rotating target to the top
-	move_push(list_a, list_b);
-	if (push_until == 3)
-		write(1, "pb\n", 3);
-	else if (push_until == 0)
-		write(1, "pa\n", 3);
+	execute_rotate(&move, list_a, list_b, push_until);
+	execute_reverse_rotate(&move, list_a, list_b, push_until);
+	execute_push(list_a, list_b, push_until);
 }
 
 void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int push_until)
@@ -81,17 +36,6 @@ void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int
 		list_b_size = initialize_indexes(*list_b);
 	}
 }
-
-/**
- * Possible refactors:
- * 2. make move_push part of the execute_move functions
- * 		- this means execute move handles all moves
- *
- *
- * 3. handle first move_push b move in the find_lowercost_move
- * 		- this means find_lowercost_move handles all moves, including the first move
- *
-*/
 
 t_move find_lowercost_move(t_stack *list_a, t_stack *list_b, int list_a_size, int list_b_size, int(f)(int, t_stack *))
 {
@@ -246,6 +190,7 @@ void rotate_smallest_to_top(t_stack **list_a)
 	i = 1;
 	tmp = *list_a;
 
+	// find smallest
 	while (tmp && tmp->next && tmp->data < tmp->next->data)
 	{
 		i++;

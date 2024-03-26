@@ -44,3 +44,28 @@ void	move_rrr(t_stack **list_a, t_stack **list_b)
 	move_reverse_rotate(list_b);
 	write(1, "rrr\n", 4);
 }
+
+void	execute_reverse_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until)
+{
+	while (move->rra > 0)
+	{
+		if (push_until == 3)
+			move_rra(list_a);
+		else if (push_until == 0)
+			move_rrb(list_a);
+		move->rra--;
+	}
+	while (move->rrb > 0)
+	{
+		if (push_until == 3)
+			move_rrb(list_b);
+		else if (push_until == 0)
+			move_rra(list_b);
+		move->rrb--;
+	}
+	while (move->rrr > 0)
+	{
+		move_rrr(list_a, list_b);
+		move->rrr--;
+	}
+}

@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-// # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include <stdio.h>
 
@@ -81,5 +80,8 @@ void	free_stack(t_stack *list);
 long	ft_atoi(const char *str);
 int		ft_isspace(char c);
 void	*ft_calloc(size_t count, size_t size);
+void	execute_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until);
+void	execute_reverse_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until);
+void execute_push(t_stack **list_a, t_stack **list_b, int push_until);
 
 #endif

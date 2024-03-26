@@ -48,3 +48,28 @@ void	move_rr(t_stack **list_a, t_stack **list_b)
 	move_rotate(list_b);
 	write(1, "rr\n", 3);
 }
+
+void	execute_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until)
+{
+	while (move->ra > 0)
+	{
+		if (push_until == 3)
+			move_ra(list_a);
+		else if (push_until == 0)
+			move_rb(list_a);
+		move->ra--;
+	}
+	while (move->rb > 0)
+	{
+		if (push_until == 3)
+			move_rb(list_b);
+		else if (push_until == 0)
+			move_ra(list_b);
+		move->rb--;
+	}
+	while (move->rr > 0)
+	{
+		move_rr(list_a, list_b);
+		move->rr--;
+	}
+}
