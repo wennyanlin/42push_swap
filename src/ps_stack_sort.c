@@ -1,5 +1,17 @@
 #include "push_swap.h"
 
+t_move	empty_move(void)
+{
+	t_move move;
+
+	move.ra = 0;
+	move.rb = 0;
+	move.rr = 0;
+	move.rra = 0;
+	move.rrb = 0;
+	move.rrr = 0;
+	return (move);
+}
 // add a parameter to differ/invert the 'move prints' when is executing from b to a
 void execute_move(t_move move, t_stack **list_a, t_stack **list_b, int push_until)
 {
@@ -45,30 +57,26 @@ void execute_move(t_move move, t_stack **list_a, t_stack **list_b, int push_unti
 		move_rrr(list_a, list_b);
 		move.rrr--;
 	}
+	// we always push once after a rotating target to the top
+	move_push(list_a, list_b);
+	if (push_until == 3)
+		write(1, "pb\n", 3);
+	else if (push_until == 0)
+		write(1, "pa\n", 3);
 }
 
 void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int push_until)
 {
-	t_move lowercost_node_moves;
+	t_move lowest_cost_move;
 	int list_a_size;
 	int list_b_size;
 
-	if (!*list_b)
-	{
-		move_push(list_a, list_b);
-		write(1, "pb\n", 3);
-	}
 	list_a_size = initialize_indexes(*list_a);
 	list_b_size = initialize_indexes(*list_b);
 	while (list_a_size > push_until)
 	{
-		lowercost_node_moves = find_lowercost_node(*list_a, *list_b, list_a_size, list_b_size, f);
-		execute_move(lowercost_node_moves, list_a, list_b, push_until);
-		move_push(list_a, list_b);
-		if (push_until == 3)
-			write(1, "pb\n", 3);
-		else if (push_until == 0)
-			write(1, "pa\n", 3);
+		lowest_cost_move = find_lowercost_move(*list_a, *list_b, list_a_size, list_b_size, f);
+		execute_move(lowest_cost_move, list_a, list_b, push_until);
 		list_a_size = initialize_indexes(*list_a);
 		list_b_size = initialize_indexes(*list_b);
 	}
@@ -76,34 +84,35 @@ void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int
 
 /**
  * Possible refactors:
- * 1. initialize_indexes can return the size
- * 		- this means we don't need to increment/decrement size on every push
  * 2. make move_push part of the execute_move functions
  * 		- this means execute move handles all moves
- * 3. handle first move_push b move in the find_lowercost_node
- * 		- this means find_lowercost_node handles all moves, including the first move
+ *
+ *
+ * 3. handle first move_push b move in the find_lowercost_move
+ * 		- this means find_lowercost_move handles all moves, including the first move
  *
 */
 
-t_move find_lowercost_node(t_stack *list_a, t_stack *list_b, int list_a_size, int list_b_size, int(f)(int, t_stack *))
+t_move find_lowercost_move(t_stack *list_a, t_stack *list_b, int list_a_size, int list_b_size, int(f)(int, t_stack *))
 {
-	t_move lowercosts;
-	t_move costs;
+	t_move lowest_cost;
+	t_move curr_node_cost;
 	int target_node_index;
 
-	lowercosts.total = -1;
+	lowest_cost.total = -1;
 	initialize_indexes(list_a);
 	initialize_indexes(list_b);
-
+	if (!list_b) // no rotates needed, just push
+		return (empty_move());
 	while (list_a)
 	{
 		target_node_index = f(list_a->data, list_b); // find the target node
-		costs = calculate_moving_cost(list_a_size, list_b_size, list_a->index, target_node_index);
-		if (lowercosts.total == -1 || costs.total < lowercosts.total)
-			lowercosts = costs;
+		curr_node_cost = calculate_moving_cost(list_a_size, list_b_size, list_a->index, target_node_index);
+		if (lowest_cost.total == -1 || curr_node_cost.total < lowest_cost.total)
+			lowest_cost = curr_node_cost;
 		list_a = list_a->next;
 	}
-	return (lowercosts);
+	return (lowest_cost);
 }
 
 void print_moves(t_move test_move)
@@ -162,19 +171,15 @@ int find_target_node_in_b(int a_node, t_stack *list_b)
 	return (target_node->index);
 }
 
+
+
 t_move calculate_moving_cost(int list_a_size, int list_b_size, int a_index, int b_index)
 {
 	int middle_line_a;
 	int middle_line_b;
 	t_move move;
 
-	move.ra = 0;
-	move.rb = 0;
-	move.rr = 0;
-	move.rra = 0;
-	move.rrb = 0;
-	move.rrr = 0;
-
+	move = empty_move();
 	middle_line_a = list_a_size / 2;
 	middle_line_b = list_b_size / 2;
 	if (a_index <= middle_line_a)

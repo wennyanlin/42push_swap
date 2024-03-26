@@ -1,7 +1,11 @@
 *.o
+*.d
 push_swap.dSYM
 checker_Mac
 Push-Swap-Tester/
 .vscode
 .DS_Store
 push_swap
+push_swap_test.sh
+traces.txt
+libftprintf.a
