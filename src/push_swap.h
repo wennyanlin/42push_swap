@@ -82,6 +82,8 @@ int		ft_isspace(char c);
 void	*ft_calloc(size_t count, size_t size);
 void	execute_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until);
 void	execute_reverse_rotate(t_move *move, t_stack **list_a, t_stack **list_b, int push_until);
-void execute_push(t_stack **list_a, t_stack **list_b, int push_until);
+void	execute_push(t_stack **list_a, t_stack **list_b, int push_until);
+int		ft_strlen(char *str);
+int		has_too_many_digits(char *str);
 
 #endif

@@ -51,6 +51,23 @@ int	is_digit(int argc, char **argv)
 	return (1);
 }
 
+int	has_too_many_digits(char *str)
+{
+	int	str_len;
+
+	str_len = ft_strlen(str);
+	if (str[0] == '-' || str[0] == '+')
+	{
+		str_len--;
+		if (str_len > 10)
+			return (1);
+	}
+	else
+		if (str_len > 11)
+			return (1);
+	return (0);
+}
+
 int	is_integer(int argc, char **argv)
 {
 	int	i;
@@ -58,7 +75,8 @@ int	is_integer(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_atoi(argv[i]) < -2147483648 || ft_atoi(argv[i]) > 2147483647)
+		if (has_too_many_digits(argv[i]) || ft_atoi(argv[i]) < -2147483648
+			|| ft_atoi(argv[i]) > 2147483647)
 			write_error();
 		i++;
 	}
