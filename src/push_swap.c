@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wlin <wlin@student.42barcelona.>           +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:15:32 by wlin              #+#    #+#             */
-/*   Updated: 2023/11/23 11:31:51 by wlin             ###   ########.fr       */
+/*   Updated: 2024/03/27 19:07:27 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	write_error(void)
+void	write_error(char **array)
 {
 	write(2, "Error\n", 6);
-	exit(0);
+	free_array(array);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv)
@@ -32,9 +33,9 @@ int	main(int argc, char **argv)
 		list_a = parse_input(argc, argv);
 		if (!list_a)
 			return (EXIT_FAILURE);
-		perform_sort(list_a);
+		perform_sort(&list_a);
 		free_stack(list_a);
 	}
-	return (0);
+	exit (EXIT_SUCCESS);
 }
 

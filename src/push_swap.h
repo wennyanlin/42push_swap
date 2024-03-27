@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wlin <wlin@student.42barcelona.>           +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 21:33:13 by wlin              #+#    #+#             */
-/*   Updated: 2023/11/23 11:16:46 by wlin             ###   ########.fr       */
+/*   Updated: 2024/03/27 19:08:26 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_stack
 int		is_duplicate(int argc, char **str_b);
 int		is_digit(int argc, char **argv);
 int		is_integer(int argc, char **argv);
-void	write_error(void);
+void	write_error(char **array);
 void	move_swap(t_stack **list);
 void	move_rotate(t_stack **list);
 void	move_ra(t_stack **list);
@@ -86,7 +86,7 @@ int		ft_strlen(char *str);
 int		has_too_many_digits(char *str);
 t_move	empty_move(void);
 t_stack	*parse_input(int argc, char **argv);
-void	perform_sort(t_stack *list_a);
+void	perform_sort(t_stack **list_a);
 void	free_array(char **array);
 
 #endif

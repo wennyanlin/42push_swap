@@ -40,15 +40,15 @@ int	is_stack_sorted(t_stack **list)
 	return (1);
 }
 
-void	perform_sort(t_stack *list_a)
+void	perform_sort(t_stack **list_a)
 {
-	if (!is_stack_sorted(&list_a))
+	if (!is_stack_sorted(list_a))
 	{
-		if (stack_size(list_a) == 2)
-			move_swap(&list_a);
-		else if (stack_size(list_a) == 3)
-			sort_3(&list_a);
+		if (stack_size(*list_a) == 2)
+			move_swap(list_a);
+		else if (stack_size(*list_a) == 3)
+			sort_3(list_a);
 		else
-			sort(&list_a);
+			sort(list_a);
 	}
 }

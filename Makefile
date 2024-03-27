@@ -2,9 +2,9 @@ NAME = push_swap
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -MMD -g
-EXTRAFLAGS = -Iinclude -I$(SRC_DIR)/libft -I$(SRC_DIR)/ft_printf
+EXTRAFLAGS = -Iinclude -I$(SRC_DIR)/ft_printf
 LDFLAGS = -L$(SRC_DIR)/ft_printf
-LDLIBS := -framework OpenGL -framework AppKit -lftprintf -fsanitize=address
+LDLIBS := -lftprintf #-fsanitize=address
 SRC_DIR		:=	src
 
 SRC_FILES	:=	$(SRC_DIR)/push_swap.c \
@@ -47,12 +47,5 @@ re:	fclean all
 
 .PHONY: all clean fclean re FT_PRINTF
 
-MLX:
-	make -C $(SRC_DIR)/libft --no-print-directory
-
 FT_PRINTF:
 	make -C $(SRC_DIR)/ft_printf --no-print-directory
-
-#-g -fsanitize=address
-#leaks --atExit -- ./so_long maps/map1.ber
-#mlx/libmlx.a -E

@@ -37,18 +37,22 @@ t_stack	*parse_input(int argc, char **argv)
 {
 	t_stack *list_a;
 	int f;
+	int	n;
+	char **array;
 
 	f = 0;
+	n = argc;
 	if (argc == 2)
 	{
-		argv = ps_split(argv[1], ' ');
+		array = ps_split(argv[1], ' ');
 		f = 1;
 	}
-	argc = calculate_array_size(argv);
-	ps_input_validate(argc, argv);
-
-	list_a = stack_init(argv, argc);
+	else
+		array = argv;
+	n = calculate_array_size(array);
+	ps_input_validate(n, array);
+	list_a = stack_init(array, n);
 	if (f == 1)
-		free_array(argv);
+		free_array(array);
 	return (list_a);
 }

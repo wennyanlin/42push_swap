@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wlin <wlin@student.42barcelona.>           +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:17:09 by wlin              #+#    #+#             */
-/*   Updated: 2023/11/22 19:27:47 by wlin             ###   ########.fr       */
+/*   Updated: 2024/03/27 19:10:50 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	move_rotate(t_stack **list)
 		tmp->next = NULL;
 		(*list)->next = tmp;
 		*list = head;
-
-		//return(head);
 }
 
 void	move_ra(t_stack **list)

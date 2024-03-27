@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_move.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/27 19:18:38 by wlin              #+#    #+#             */
+/*   Updated: 2024/03/27 19:28:29 by wlin             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_move find_lowercost_move(t_stack *list_a, t_stack *list_b, int list_a_size, int list_b_size, int(f)(int, t_stack *))
+t_move	find_lowercost_move(t_stack *list_a, t_stack *list_b, int list_a_size,int list_b_size, int(f)(int, t_stack *))
 {
 	t_move lowest_cost;
 	t_move curr_node_cost;
