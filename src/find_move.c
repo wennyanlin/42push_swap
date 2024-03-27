@@ -12,15 +12,17 @@
 
 #include "push_swap.h"
 
-t_move	find_lowercost_move(t_stack *list_a, t_stack *list_b, int list_a_size,int list_b_size, int(f)(int, t_stack *))
+t_move	find_lowercost_move(t_stack *list_a, t_stack *list_b, int(f)(int, t_stack *))
 {
 	t_move lowest_cost;
 	t_move curr_node_cost;
-	int target_node_index;
+	int 	target_node_index;
+	int 	list_a_size;
+	int 	list_b_size;
 
 	lowest_cost.total = -1;
-	initialize_indexes(list_a);
-	initialize_indexes(list_b);
+	list_a_size = initialize_indexes(list_a);
+	list_b_size = initialize_indexes(list_b);
 	if (!list_b) // no rotates needed, just push
 		return (empty_move());
 	while (list_a)

@@ -12,7 +12,7 @@ int	is_duplicate(int argc, char **argv)
 		while (j < argc)
 		{
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				write_error(argv);
+				write_error();
 			j++;
 		}
 	}
@@ -32,11 +32,11 @@ int	is_digit(int argc, char **argv)
 				&& argv[i][j + 1] <= '9')
 			j++;
 		else if (argv[i][j] == '\0')
-			write_error(argv);
+			write_error();
 		while (argv[i][j] != '\0')
 		{
 			if (argv[i][j] < '0' || argv[i][j] > '9')
-				write_error(argv);
+				write_error();
 			j++;
 		}
 		j = 0;
@@ -81,7 +81,7 @@ int	is_integer(int argc, char **argv)
 	{
 		if (has_too_many_digits(argv[i]) || ft_atoi(argv[i]) < -2147483648
 			|| ft_atoi(argv[i]) > 2147483647)
-			write_error(argv);
+			write_error();
 		i++;
 	}
 	return (0);

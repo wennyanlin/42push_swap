@@ -52,16 +52,15 @@ void execute_move(t_move move, t_stack **list_a, t_stack **list_b, int push_unti
 void push_a_to_b(t_stack **list_a, t_stack **list_b, int(f)(int, t_stack *), int push_until)
 {
 	t_move lowest_cost_move;
-	int list_a_size;
-	int list_b_size;
+	int		list_a_size;
 
 	list_a_size = initialize_indexes(*list_a);
-	list_b_size = initialize_indexes(*list_b);
+	initialize_indexes(*list_b);
 	while (list_a_size > push_until)
 	{
-		lowest_cost_move = find_lowercost_move(*list_a, *list_b, list_a_size, list_b_size, f);
+		lowest_cost_move = find_lowercost_move(*list_a, *list_b, f);
 		execute_move(lowest_cost_move, list_a, list_b, push_until);
 		list_a_size = initialize_indexes(*list_a);
-		list_b_size = initialize_indexes(*list_b);
+		initialize_indexes(*list_b);
 	}
 }

@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	write_error(char **array)
+void	write_error(void)
 {
 	write(2, "Error\n", 6);
-	free_array(array);
+	// free_array(array);
 	exit(EXIT_FAILURE);
 }
 
