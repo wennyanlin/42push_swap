@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-#include "push_swap.h"
-
 void	move_rotate(t_stack **list)
 {
 		t_stack	*tmp;

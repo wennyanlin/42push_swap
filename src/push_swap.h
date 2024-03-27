@@ -34,7 +34,6 @@ typedef struct s_stack
 	int				data;
 	int				index;
 
-
 	struct s_stack	*next;
 	struct s_move	curr_move;
 }	t_stack;
@@ -54,7 +53,7 @@ void	move_rrb(t_stack **list);
 void	move_rrr(t_stack **list_a, t_stack **list_b);
 void	move_push(t_stack **list_a, t_stack **list_b);
 void	ps_input_validate(int  n, char **nbrs);
-t_stack *ps_stack_init(char **nbrs, int n);
+t_stack	*stack_init(char **nbrs, int n);
 int		find_max_nbr(t_stack *list);
 void	sort_3(t_stack **list);
 void	print_stack(t_stack *list);
@@ -85,5 +84,9 @@ void	execute_reverse_rotate(t_move *move, t_stack **list_a, t_stack **list_b, in
 void	execute_push(t_stack **list_a, t_stack **list_b, int push_until);
 int		ft_strlen(char *str);
 int		has_too_many_digits(char *str);
+t_move	empty_move(void);
+t_stack	*parse_input(int argc, char **argv);
+void	perform_sort(t_stack *list_a);
+void	free_array(char **array);
 
 #endif

@@ -7,17 +7,20 @@ LDFLAGS = -L$(SRC_DIR)/ft_printf
 LDLIBS := -framework OpenGL -framework AppKit -lftprintf -fsanitize=address
 SRC_DIR		:=	src
 
-SRC_FILES	:=	$(SRC_DIR)/ps_main.c \
+SRC_FILES	:=	$(SRC_DIR)/push_swap.c \
 				$(SRC_DIR)/move_swap.c \
 				$(SRC_DIR)/move_rotate.c \
 				$(SRC_DIR)/move_reverse_rotate.c \
 				$(SRC_DIR)/move_push.c \
-				$(SRC_DIR)/ps_input_validate.c \
-				$(SRC_DIR)/ps_stack_init.c \
-				$(SRC_DIR)/ps_stack_sort.c \
-				$(SRC_DIR)/utils.c \
+				$(SRC_DIR)/input_validate.c \
+				$(SRC_DIR)/find_move.c \
+				$(SRC_DIR)/stack_init.c \
+				$(SRC_DIR)/stack_sort.c \
+				$(SRC_DIR)/stack_move.c \
+				$(SRC_DIR)/utils_array.c \
+				$(SRC_DIR)/utils_stack.c \
 				$(SRC_DIR)/ft_atoi.c \
-				$(SRC_DIR)/ps_split.c
+				$(SRC_DIR)/ft_split.c
 
 OBJ_FILES	=	$(SRC_FILES:.c=.o)
 DEP_FILES	=	$(SRC_FILES:.c=.d)

@@ -21,7 +21,6 @@ int	ps_count_words(char *array, char separator)
 	return (words);
 }
 
-
 char	*get_next_word(char *array, char separator)
 {
 	char		*next_word;
@@ -29,7 +28,6 @@ char	*get_next_word(char *array, char separator)
 	int			j;
 	int			len;
 
-	// i = 0;
 	len = 0;
 	j = 0;
 	while (array[i])
@@ -73,17 +71,9 @@ char	**ps_split(char *array, char separator)
 		}
 		result_array[i++] = get_next_word(array, separator);
 	}
-	result_array[i] = NULL; //add final Null terminator
+	result_array[i] = NULL;
 	return (result_array);
 }
-
-	//allocate space for the big array
-		//calculate the lentgh, how many strs there are
-		//allocate the mamory space
-	//allocate space for the chars
-		//find chars
-		//calculate the length
-		//allocate space
 
 // int	main()
 // {

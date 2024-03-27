@@ -12,92 +12,10 @@
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *list)
+void	write_error(void)
 {
-	while (list)
-	{
-		printf("\nnode: %d - %d", list->data, list->index);
-		list = (list)->next;
-	}
-}
-
-int	calculate_array_size(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
-
-void	free_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i++]);
-	}
-	free(array);
-}
-
-void	free_stack(t_stack *list)
-{
-	t_stack	*tmp;
-
-	while (list)
-	{
-		tmp = list;
-		list = list->next;
-		free(tmp);
-	}
-	list = NULL;
-}
-
-t_stack	*parse_input(int argc, char **argv)
-{
-	t_stack *list_a;
-	int f;
-
-	f = 0;
-	if (argc == 2)
-	{
-		argv = ps_split(argv[1], ' ');
-		f = 1;
-	}
-	argc = calculate_array_size(argv);
-	ps_input_validate(argc, argv);
-
-	list_a = ps_stack_init(argv, argc);
-	if (f == 1)
-		free_array(argv);
-	return (list_a);
-}
-
-void	perform_sort(t_stack *list_a)
-{
-	if (!is_stack_sorted(&list_a))
-	{
-		if (stack_size(list_a) == 2)
-			move_swap(&list_a);
-		else if (stack_size(list_a) == 3)
-			sort_3(&list_a);
-		else
-			sort(&list_a);
-	}
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (*str)
-		while (str[i])
-			i++;
-	return (i);
+	write(2, "Error\n", 6);
+	exit(0);
 }
 
 int	main(int argc, char **argv)

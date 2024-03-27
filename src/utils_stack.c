@@ -1,5 +1,17 @@
 #include "push_swap.h"
 
+void	free_stack(t_stack *list)
+{
+	t_stack	*tmp;
+
+	while (list)
+	{
+		tmp = list;
+		list = list->next;
+		free(tmp);
+	}
+	list = NULL;
+}
 
 int	find_max_nbr(t_stack *list)
 {
@@ -26,34 +38,6 @@ int	stack_size(t_stack *list_a)
 		list_a = (list_a)->next;
 	}
 	return (i);
-}
-
-int	initialize_indexes(t_stack *list)
-{
-	int	index;
-
-	index = 0;
-	while (list)
-	{
-		list->index = index;
-		index++;
-		list = list->next;
-	}
-	return (index);
-}
-
-int	is_stack_sorted(t_stack **list)
-{
-	t_stack	*list_cpy;
-
-	list_cpy = *list;
-	while (list_cpy && list_cpy->next)
-	{
-		if (list_cpy->data > list_cpy->next->data)
-			return (0);
-		list_cpy = list_cpy->next;
-	}
-	return (1);
 }
 
 t_stack	*stack_last(t_stack *lst)

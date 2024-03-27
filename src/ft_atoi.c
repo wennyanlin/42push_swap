@@ -12,23 +12,6 @@
 
 #include "push_swap.h"
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	char	*str;
-	size_t	i;
-
-	i = 0;
-	str = (char *)malloc(size * count);
-	if (str == NULL)
-		return (NULL);
-	while (i < (count * size))
-	{
-		str[i] = '\0';
-		i++;
-	}
-	return (str);
-}
-
 int	ft_isspace(char c)
 {
 	if ((c >= 9 && c <= 13) || c == ' ')
@@ -60,9 +43,3 @@ long	ft_atoi(const char *str)
 	}
 	return (total * flag);
 }
-/*
-int	main()
-{
-	printf("%i", ft_atoi("  -12"));
-
-}*/
