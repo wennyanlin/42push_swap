@@ -1,49 +1,51 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wlin <wlin@student.42barcelona.>           +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/18 16:49:23 by wlin              #+#    #+#              #
-#    Updated: 2023/11/22 22:42:09 by wlin             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = push_swap
 
-INCLUDES = push_swap.h
+CC := gcc
+CFLAGS := -Wall -Wextra -Werror -MMD -g
+EXTRAFLAGS = -Iinclude -I$(SRC_DIR)/ft_printf
+LDFLAGS = -L$(SRC_DIR)/ft_printf
+LDLIBS := -lftprintf #-fsanitize=address
+SRC_DIR		:=	src
 
-LIBFT = ./libft/libft.a
+SRC_FILES	:=	$(SRC_DIR)/push_swap.c \
+				$(SRC_DIR)/move_swap.c \
+				$(SRC_DIR)/move_rotate.c \
+				$(SRC_DIR)/move_reverse_rotate.c \
+				$(SRC_DIR)/move_push.c \
+				$(SRC_DIR)/input_validate.c \
+				$(SRC_DIR)/find_move.c \
+				$(SRC_DIR)/stack_init.c \
+				$(SRC_DIR)/stack_sort.c \
+				$(SRC_DIR)/stack_move.c \
+				$(SRC_DIR)/utils_array.c \
+				$(SRC_DIR)/utils_stack.c \
+				$(SRC_DIR)/ft_atoi.c \
+				$(SRC_DIR)/ft_split.c
 
-SRCS = ps_main.c move_swap.c move_rotate.c move_reverse_rotate.c \
-		move_push.c ps_input_validate.c ps_stack_init.c ps_stack_sort.c utils.c\
-		ps_split.c\
+OBJ_FILES	=	$(SRC_FILES:.c=.o)
+DEP_FILES	=	$(SRC_FILES:.c=.d)
 
-OBJS = $(SRCS:.c=.o)
+# Regla/metodo implicito
+%.o:%.c 	src/push_swap.h Makefile
+			$(CC) $(CFLAGS) -c $< -o $@
 
-COMPILER = gcc
+# Mis reglas mis metodos
+all: FT_PRINTF $(NAME)
 
-CFLAGS = -Wall -Werror -Wextra
-
-%.o: %.c Makefile $(INCLUDES)
-	$(COMPILER) $(CFLAGS) -I $(INCLUDES) -c $< -o $(NAME)
-
-$(NAME): lib $(LIBFT) $(OBJS) $(INCLUDES) Makefile
-	$(COMPILER) $(CFLAGS) $(SRCS) -L./libft -lft -g -fsanitize=address -o $(NAME)
-
-lib:
-	$(MAKE) -C ./libft
-
-all: lib $(NAME)
+-include $(DEP_FILES)
+$(NAME): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $(EXTRAFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ_FILES) -o $@
 
 clean:
-		rm -f $(OBJS)
-		$(MAKE) -C ./libft fclean
+		rm -f $(OBJ_FILES) $(DEP_FILES)
+		make -C $(SRC_DIR)/ft_printf fclean
 
-fclean: clean
+fclean:	clean
 		rm -f $(NAME)
 
-re:		fclean all
+re:	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FT_PRINTF
+
+FT_PRINTF:
+	make -C $(SRC_DIR)/ft_printf --no-print-directory
